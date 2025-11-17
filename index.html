@@ -58,11 +58,30 @@
 <div id="loading"></div>
 
 <script>
+const policyDescriptions = {
+    "全民氣候行動日": "制定應對氣候變遷的法律，並定期舉辦全民氣候行動活動，讓大人與孩子都能一起參與。",
+    "菸蒂不落地": "推動菸蒂減量與收集設施，結合教育宣導，讓環境更乾淨、空氣更清新。",
+    "綠色通勤更容易": "加強公共運輸使用與獎勵措施，減少私人交通工具，降低碳排放。",
+    "社區公園 × 樹更多": "每個城市都應有更多安全、綠意的公園，讓孩子能自在呼吸與遊戲。",
+    "減塑日行動！": "每月一次「減塑日」，從社區與校園開始，減少一次性塑膠製品使用。",
+    "菸品減害設計": "要求菸品製造商改用可分解濾嘴，減少環境污染與下水道堵塞。",
+
+    "智慧3C設計": "政府應規範3C產品，在長時間使用後提醒休息，保護眼睛與健康。",
+    "健康使用3C教育": "定期進行健康使用3C宣導，提供教材與活動，幫助家長與兒少理解過度使用的危害。",
+    "校園無3C日": "每學期至少舉辦一次校園無3C日，鼓勵學生多參與戶外活動、降低近視率。",
+    "數位性剝削零容忍": "完善防治兒少數位性剝削的法律，並建立兒少專屬的安全通報與支持系統。",
+    "媒體共同守護": "政府與媒體應加強宣導數位性剝削的危害，提升社會大眾防範意識。",
+
+    "全校學生會議制度化": "每學年至少舉辦一次全校學生會議，讓學生能發表對校園生活與政策的意見。"
+};
+
 function runSimulation() {
     const sel = document.getElementById("policySelect").value;
     if (!sel) return;
-
+    
     const [policy, target] = sel.split("|");
+
+    const detail = policyDescriptions[policy];
 
     // 顯示 loading 區塊
     const load = document.getElementById("loading");
@@ -85,12 +104,12 @@ function runSimulation() {
             clearInterval(timer);
 
             // 跳轉 + 搬運政策名稱
-            const url = `${target}?policy=${encodeURIComponent(policy)}`;
-            setTimeout(() => { window.location.href = url; }, 600);
-        }
-    }, 600);
+            const url = `${category}?policy=${encodeURIComponent(policy)}&detail=${encodeURIComponent(detail)}`;
+        window.location.href = url;
+    }, 1900);
 }
 </script>
 
 </body>
 </html>
+
