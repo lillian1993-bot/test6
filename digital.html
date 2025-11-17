@@ -29,9 +29,20 @@ function typeWriter(text, i, cb) {
 }
 
 const url = new URL(window.location.href);
-const policy = url.searchParams.get("policy");
+let policy = url.searchParams.get("policy");
+let detail = url.searchParams.get("detail");
 
-const content = `
+if (!policy) policy = "（未選擇）";
+if (!detail) detail = "（無詳細資訊）";
+    
+const content = 
+啟動數位安全模組…
+----------------------------------------
+
+policy_selected = "${policy}"
+policy_detail   = "${detail}"
+
+----------------------------------------`
 > initializing cyber.secure.pipeline ...
 > input policy: "${policy}"
 
@@ -54,13 +65,18 @@ deploy.patch(target="digital_safety",policy="${policy}");
 # ASCII Visualization
 ----------------------------------------
 
-      ________
-     | 3C BOX |
-     | [====] |
-     |________|
-        (•‿•)
-         /│\\
-         / \\
+      ______________________________________
+      |  ┌────────────────────────────────┐  |
+      |  |   DIGITAL TERMINAL DEVICE      |  |
+      |  |--------------------------------|  |
+      |  |  [  APP  ]  [ SAFE ]  [ :) ]   |  |
+      |  |                                  |
+      |  └──────────────────────────────────┘  |
+       ----------------------------------------
+
+                    O
+                   /|\\
+                   / \\
 
 A safer, healthier digital world for children.
 ----------------------------------------
@@ -71,3 +87,4 @@ typeWriter(content, 0, ()=>{});
 
 </body>
 </html>
+
