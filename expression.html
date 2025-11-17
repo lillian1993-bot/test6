@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>Child Expression</title>
+<style>
+    body {
+        background: black;
+        color: #00ff00;
+        font-family: Consolas, monospace;
+        white-space: pre;
+        padding: 30px;
+    }
+    #output { white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+<div id="output"></div>
+
+<script>
+function typeWriter(text, i, cb) {
+    if (i < text.length) {
+        document.getElementById("output").innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1, cb), 20);
+    } else {
+        cb();
+    }
+}
+
+const url = new URL(window.location.href);
+const policy = url.searchParams.get("policy");
+
+const content = `
+> accessing civic.participation.kernel ...
+> loading child expression module...
+> input policy: "${policy}"
+
+----------------------------------------
+>>> SIMULATING PARTICIPATION PROCESS...
+----------------------------------------
+
+[35%] ███████▒▒▒▒▒▒▒▒▒▒▒▒▒ 35%  collecting voices...
+[50%] ███████████▒▒▒▒▒▒▒▒ 50%  integrating feedback...
+[75%] ███████████████▒▒▒ 75%  building decision model...
+[100%] ██████████████████ 100% 完成！
+
+----------------------------------------
+>>> POLICY DEPLOYED
+----------------------------------------
+
+system.deploy(
+    module="Child_Participation",
+    ensure_voice="enabled",
+    policy="${policy}"
+);
+
+----------------------------------------
+# ASCII Visualization
+----------------------------------------
+
+         ________________
+        |   MEGA-PHONE   |
+        |________________|
+
+              (•‿•)
+               /│\\
+               / \\
+
+A future where every child’s voice matters.
+----------------------------------------
+`;
+
+typeWriter(content, 0, ()=>{});
+</script>
+
+</body>
+</html>

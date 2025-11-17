@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>Digital Safety</title>
+<style>
+    body {
+        background: black;
+        color: #00ff00;
+        font-family: Consolas, monospace;
+        white-space: pre;
+        padding: 30px;
+    }
+    #output { white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+<div id="output"></div>
+
+<script>
+function typeWriter(text, i, cb) {
+    if (i < text.length) {
+        document.getElementById("output").innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1, cb), 20);
+    } else {
+        cb();
+    }
+}
+
+const url = new URL(window.location.href);
+const policy = url.searchParams.get("policy");
+
+const content = `
+> initializing cyber.secure.pipeline ...
+> input policy: "${policy}"
+
+----------------------------------------
+>>> COMPILING DIGITAL SAFETY POLICY...
+----------------------------------------
+
+[35%] ███████▒▒▒▒▒▒▒▒▒▒▒▒▒ 35%  loading research...
+[50%] ███████████▒▒▒▒▒▒▒▒ 50%  evaluating risks...
+[75%] ███████████████▒▒▒ 75%  applying expert input...
+[100%] ██████████████████ 100% 完成！
+
+----------------------------------------
+>>> PATCH READY
+----------------------------------------
+
+deploy.patch(target="digital_safety",policy="${policy}");
+
+----------------------------------------
+# ASCII Visualization
+----------------------------------------
+
+      ________
+     | 3C BOX |
+     | [====] |
+     |________|
+        (•‿•)
+         /│\\
+         / \\
+
+A safer, healthier digital world for children.
+----------------------------------------
+`;
+
+typeWriter(content, 0, ()=>{});
+</script>
+
+</body>
+</html>

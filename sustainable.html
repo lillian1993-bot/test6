@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>Sustainable Environment</title>
+<style>
+    body {
+        background: black;
+        color: #00ff00;
+        font-family: Consolas, monospace;
+        white-space: pre;
+        padding: 30px;
+    }
+    #output { white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+<div id="output"></div>
+
+<script>
+function typeWriter(text, i, cb) {
+    if (i < text.length) {
+        document.getElementById("output").innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1, cb), 20);
+    } else {
+        cb();
+    }
+}
+
+const url = new URL(window.location.href);
+const policy = url.searchParams.get("policy");
+
+const content = `
+> booting gov.decision.module ...
+> loading child_policy_proposal.exe ...
+> user-role detected: DECISION-MAKER
+
+[Input Received]
+policy_selected = "${policy}"
+
+----------------------------------------
+>>> PROCESSING CHILD POLICY PROPOSAL...
+----------------------------------------
+
+[35%] ███████▒▒▒▒▒▒▒▒▒▒▒▒▒ 35%  更新中...
+[50%] ███████████▒▒▒▒▒▒▒▒ 50%  專家資料整合中...
+[75%] ███████████████▒▒▒ 75%  彙整跨部會建議...
+[100%] ██████████████████ 100% 完成！
+
+----------------------------------------
+>>> DECISION PACKAGE GENERATED
+----------------------------------------
+
+gov.execute(
+    module="Sustainable_Environment",
+    selected_policy="${policy}",
+    priority=1
+);
+
+----------------------------------------
+# ASCII Visualization
+----------------------------------------
+
+            |||||||||||||||
+           |||||||||||||||||||
+          |||   |||||   |||||
+           ||  (•‿•)  |||||
+             ───/│\\────
+               / \\
+
+ A greener, breathable city for all children.
+----------------------------------------
+`;
+
+typeWriter(content, 0, ()=>{});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>政策選擇器 / Policy Selector</title>
+<style>
+    body {
+        background: black;
+        color: #00ff00;
+        font-family: Consolas, monospace;
+        padding: 40px;
+    }
+    select, button {
+        background: black;
+        color: #00ff00;
+        border: 1px solid #00ff00;
+        padding: 8px;
+        font-family: Consolas, monospace;
+    }
+    #loading {
+        white-space: pre;
+        margin-top: 20px;
+        font-size: 16px;
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<h2>gov.policy.module // 政策模擬器</h2>
+<p>請選擇一項要優先執行的兒少政策建議：</p>
+
+<select id="policySelect">
+    <option value="" disabled selected>-- 請選擇政策 --</option>
+
+    <option disabled>=== 永續環境 ===</option>
+    <option value="綠色通勤更容易|sustainable.html">綠色通勤更容易</option>
+    <option value="全民氣候行動日|sustainable.html">全民氣候行動日</option>
+    <option value="菸蒂不落地|sustainable.html">菸蒂不落地</option>
+    <option value="社區公園 × 樹更多|sustainable.html">社區公園 × 樹更多</option>
+    <option value="減塑日行動|sustainable.html">減塑日行動</option>
+    <option value="菸品減害設計|sustainable.html">菸品減害設計</option>
+
+    <option disabled>=== 數位安全與健康使用 ===</option>
+    <option value="智慧3C設計|digital.html">智慧3C設計</option>
+    <option value="健康使用3C教育|digital.html">健康使用3C教育</option>
+    <option value="校園無3C日|digital.html">校園無3C日</option>
+    <option value="數位性剝削零容忍|digital.html">數位性剝削零容忍</option>
+    <option value="媒體共同守護|digital.html">媒體共同守護</option>
+
+    <option disabled>=== 兒少參與與表意 ===</option>
+    <option value="全校學生會議制度化|expression.html">全校學生會議制度化</option>
+</select>
+
+<br><br>
+<button onclick="runSimulation()">執行 / Execute</button>
+
+<div id="loading"></div>
+
+<script>
+function runSimulation() {
+    const sel = document.getElementById("policySelect").value;
+    if (!sel) return;
+
+    const [policy, target] = sel.split("|");
+
+    // 顯示 loading 區塊
+    const load = document.getElementById("loading");
+    load.style.display = "block";
+
+    const seq = [
+        "[35%] ███████▒▒▒▒▒▒▒▒▒▒▒▒▒ 35%  loading...\n",
+        "[50%] ███████████▒▒▒▒▒▒▒▒ 50%  compiling...\n",
+        "[75%] ███████████████▒▒▒ 75%  linking...\n",
+        "[100%] ██████████████████ 100% 完成！\n"
+    ];
+
+    let idx = 0;
+    load.textContent = "";
+
+    let timer = setInterval(() => {
+        load.textContent += seq[idx];
+        idx++;
+        if (idx === seq.length) {
+            clearInterval(timer);
+
+            // 跳轉 + 搬運政策名稱
+            const url = `${target}?policy=${encodeURIComponent(policy)}`;
+            setTimeout(() => { window.location.href = url; }, 600);
+        }
+    }, 600);
+}
+</script>
+
+</body>
+</html>
