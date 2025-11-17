@@ -77,11 +77,15 @@ const policyDescriptions = {
 
 function runSimulation() {
     const sel = document.getElementById("policySelect").value;
-    if (!sel) return;
+    if (!sel)  {
+        alert("請選擇一項政策！"); // 修改位置 4: 提示使用者
+        return;
+    }
     
     const [policy, target] = sel.split("|");
 
     const detail = policyDescriptions[policy];
+    const detail = policyDescriptions[policy] || "（無詳細資訊）";
 
     // 顯示 loading 區塊
     const load = document.getElementById("loading");
@@ -104,12 +108,14 @@ function runSimulation() {
             clearInterval(timer);
 
             // 跳轉 + 搬運政策名稱
-            const url = `${category}?policy=${encodeURIComponent(policy)}&detail=${encodeURIComponent(detail)}`;
-        window.location.href = url;
-    }, 1900);
+            const url = `${target}?policy=${encodeURIComponent(policy)}&detail=${encodeURIComponent(detail)}`;
+            window.location.href = url;
+        }
+    }, 700);
 }
 </script>
 
 </body>
 </html>
+
 
