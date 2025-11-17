@@ -29,9 +29,20 @@ function typeWriter(text, i, cb) {
 }
 
 const url = new URL(window.location.href);
-const policy = url.searchParams.get("policy");
+let policy = url.searchParams.get("policy");
+let detail = url.searchParams.get("detail");
 
-const content = `
+if (!policy) policy = "（未選擇）";
+if (!detail) detail = "（無詳細資訊）";
+
+const content = 
+啟動兒少表意模組…
+----------------------------------------
+
+policy_selected = "${policy}"
+policy_detail   = "${detail}"
+
+----------------------------------------`
 > accessing civic.participation.kernel ...
 > loading child expression module...
 > input policy: "${policy}"
@@ -59,14 +70,17 @@ system.deploy(
 # ASCII Visualization
 ----------------------------------------
 
-         ________________
-        |   MEGA-PHONE   |
-        |________________|
+         /\\
+        /  \\
+       /    \\
+------|      )  )))
+      \\    /
+       \\  /
+        \\/
 
-              (•‿•)
-               /│\\
-               / \\
-
+            O
+           /|\\
+           / \\
 A future where every child’s voice matters.
 ----------------------------------------
 `;
@@ -76,3 +90,4 @@ typeWriter(content, 0, ()=>{});
 
 </body>
 </html>
+
